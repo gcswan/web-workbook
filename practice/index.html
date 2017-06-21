@@ -1,15 +1,113 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/style.css/"/>
-    <title>DIVS</title>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <section>
-      <div class="one"></div>
-      <div class="two"></div>
-      <div class="three"></div>
-    </section>
+    <script>
+    var choice = function()
+            {
+                    var userChoice = prompt("Select rock, paper, scissors,rope");
+                    if(userChoice!=="rock" && userChoice!=="paper" && userChoice!=="scissors" && userChoice!=="rope")
+                    {
+                        alert("You have entered wrong choice, enter rock, paper, scissors or rope");
+                        choice();
+                    }
+                    else{
+                    var computerChoice = Math.random();
+
+                    if(computerChoice<=0.25){
+                        computerChoice = "rock";
+                    }
+                    else if(computerChoice<=0.50){
+                        computerChoice = "paper";
+                    }
+                    else if(computerChoice<=0.75){
+                        computerChoice = "scissors";
+                    }
+                    else{
+                        computerChoice = "rope";
+                    }
+                    alert("The Computer's choice is:- "+computerChoice);
+                    var answer = compare(userChoice,computerChoice);
+                    alert(answer);
+                    }
+
+            };
+
+            var compare = function(choice1,choice2)
+            {
+                if(choice1===choice2)
+                {
+                    alert("It's a tie! You must select another choice!");
+                    choice();
+                    return compare(userChoice,computerChoice);
+                }
+
+                else if(choice1==="rock")
+                {
+                    if(choice2==="scissors")
+                    {
+                        return("Rock wins! You've won!");
+                    }
+                    else if(choice2==="paper")
+                    {
+                        return("Paper wins! You lose!");
+                    }
+                    else
+                    {
+                        return("Rope wins! You lose!");
+                    }
+                }
+                else if(choice1==="paper")
+                {
+                    if(choice2==="rock")
+                    {
+                        return("paper wins! You've won!");
+                    }
+                    else if(choice2==="scissors")
+                    {
+                        return("Scissors wins! You lose!");
+                    }
+                    else
+                    {
+                        return("Rope wins! You lose!");
+                    }
+                }
+                else if(choice1==="scissors")
+                {
+                    if(choice2==="paper")
+                    {
+                        return("Scissors wins! You've won!");
+                    }
+                    else if(choice2==="rock")
+                    {
+                        return("Rock wins! You lose!");
+                    }
+                    else
+                    {
+                        return("Rope wins! You lose!");
+                    }
+                }
+                else if(choice1==="rope")
+                {
+                    if(choice2==="paper")
+                    {
+                        return("Rope wins! You've won!");
+                    }
+                    else if(choice2==="rock")
+                    {
+                        return("Rope wins! You win!");
+                    }
+                    else
+                    {
+                        return("Rope wins! You win!");
+                    }
+                }
+            };
+            choice();
+    </script>
 
   </body>
 </html>
