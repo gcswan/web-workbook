@@ -4,43 +4,37 @@ $(function() {
     $(this).text(playerTurn);
     checkWin()
     playerTurn = playerTurn === 'X' ? 'O' : 'X';
+    function checkWin() {
+      const winningCombos = [
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,4,8],
+        [2,4,6]
+      ]
+
+      for(let combo = 0; combo < winningCombos.length; combo++){
+        if(
+          $('[data-cell=' + `"${winningCombos[combo][0]}"` + ']').text() === playerTurn &&
+          $('[data-cell=' + `"${winningCombos[combo][1]}"` + ']').text() === playerTurn &&
+          $('[data-cell=' + `"${winningCombos[combo][2]}"` + ']').text() === playerTurn
+          ){
+            $('#announce-winner').text(`${playerTurn} Wins`);
+          } else {
+            return false
+          }
+      }
+    }
   });
   $('#clear').click(clearBoard)
+  })
 
 
-  function checkWin() {
-    if (
-      $('[data-cell="0"]').text() === playerTurn &&
-      $('[data-cell="3"]').text() === playerTurn &&
-      $('[data-cell="6"]').text() === playerTurn ||
-      $('[data-cell="1"]').text() === playerTurn &&
-      $('[data-cell="4"]').text() === playerTurn &&
-      $('[data-cell="7"]').text() === playerTurn ||
-      $('[data-cell="2"]').text() === playerTurn &&
-      $('[data-cell="5"]').text() === playerTurn &&
-      $('[data-cell="8"]').text() === playerTurn ||
-      $('[data-cell="0"]').text() === playerTurn &&
-      $('[data-cell="1"]').text() === playerTurn &&
-      $('[data-cell="2"]').text() === playerTurn ||
-      $('[data-cell="3"]').text() === playerTurn &&
-      $('[data-cell="4"]').text() === playerTurn &&
-      $('[data-cell="5"]').text() === playerTurn ||
-      $('[data-cell="6"]').text() === playerTurn &&
-      $('[data-cell="7"]').text() === playerTurn &&
-      $('[data-cell="8"]').text() === playerTurn ||
-      $('[data-cell="0"]').text() === playerTurn &&
-      $('[data-cell="4"]').text() === playerTurn &&
-      $('[data-cell="8"]').text() === playerTurn ||
-      $('[data-cell="2"]').text() === playerTurn &&
-      $('[data-cell="4"]').text() === playerTurn &&
-      $('[data-cell="6"]').text() === playerTurn)
-      {
-      $('#announce-winner').text(`${playerTurn} Wins`)
-      } else {
-      return false;
-      }
-  }
-})
+
  function clearBoard()  {
    $('[data-cell]').empty();
- }
+   $('#announce-winner').text('');
+  }
